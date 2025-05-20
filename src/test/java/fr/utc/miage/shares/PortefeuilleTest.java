@@ -86,16 +86,38 @@ class PortefeuilleTest {
 
     @Test
     void testProvisionnerNegatif() {
+        //Arrange
         Portefeuille portefeuille = new Portefeuille(CLIENT);
         final double valeurAjoutee = -50;
 
+        //Action
         boolean nosuccess = portefeuille.provisionner(valeurAjoutee);
 
+        //Assert
         Assertions.assertAll("Ajout d'une valeur négative",
             () -> Assertions.assertFalse(nosuccess, "L'ajout échoue"),
             () -> Assertions.assertEquals(0.0, portefeuille.getSolde(), "Le solde n'a pas changée")
         );
     }
 
-    
+    @Test
+    final void testAchatActionSoldeInsuffisant() {
+        //Arrange
+        final double valeurajoutee = 149;
+        final float valeuraction = 50;
+        final Jour jour = new Jour(2025, 143);
+        final Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final ActionSimple action = new ActionSimple("Total");
+
+        action.enrgCours(jour, valeuraction);
+        portefeuille.provisionner(valeurajoutee);
+
+        // Action
+        boolean success = portefeuille.acheterAction(action, 3, jour);
+
+
+        //Assert
+        Assertions.assertFalse(success,"Achat refusée, solde insuffisant");
+
+    }
 }
