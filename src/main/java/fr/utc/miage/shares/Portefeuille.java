@@ -29,4 +29,12 @@ public class Portefeuille {
         return actions;
     }
 
+    public final boolean provisionner(final double argent) {
+        if (argent > 0) {
+            this.solde += argent;
+            return true;
+        }
+        return false;
+    }
+
 }

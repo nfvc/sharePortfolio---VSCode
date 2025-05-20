@@ -9,10 +9,6 @@ class PortefeuilleTest {
      * client.
     */
     private static final Client CLIENT = new Client("Aymane", "Akcha", "Toulouse", "0456377890", "akcha@outlook.fr", "akcha");
-    /**
-     * deuxieme client.
-    */
-    private static final Client DEUXIEME_CLIENT = new Client("Negroni","Giani", "Toulouse", "0987769065", "giani@outlook.fr", "giani");
 
     /**
      * Test Constructeur
@@ -33,6 +29,20 @@ class PortefeuilleTest {
                 .getNom(), "Basic construction");
         Assertions.assertEquals(expectedPrenomClient, portefeuille.getClient()
                 .getPrenom(), "Basic construction");
+    }
+
+    @Test
+    void testProvisionnerPositif() {
+        //Arrange
+        Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final double valeurattendue = 100;
+        final double valeurajouter = 100;
+
+        //Action
+        boolean success = portefeuille.provisionner(valeurajouter);
+        //Assert
+        Assertions.assertEquals(valeurattendue, portefeuille.getSolde(), "Ajout");
+        Assertions.assertTrue(success);
     }
 
     
