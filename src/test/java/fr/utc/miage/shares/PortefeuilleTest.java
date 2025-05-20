@@ -25,6 +25,7 @@ class PortefeuilleTest {
         //Action
         final String expectedNomClient = "Aymane";
         final String expectedPrenomClient = "Akcha";
+        
 
 
         //Assert
@@ -33,4 +34,6 @@ class PortefeuilleTest {
         Assertions.assertEquals(expectedPrenomClient, portefeuille.getClient()
                 .getPrenom(), "Basic construction");
     }
+
+    
 }
