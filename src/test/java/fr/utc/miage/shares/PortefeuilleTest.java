@@ -113,11 +113,30 @@ class PortefeuilleTest {
         portefeuille.provisionner(valeurajoutee);
 
         // Action
+        boolean nosuccess = portefeuille.acheterAction(action, 6, jour);
+
+
+        //Assert
+        Assertions.assertFalse(nosuccess,"Achat refusée, solde insuffisant");
+    }
+
+    @Test
+    final void testAchatActionReussi() {
+        //Arrange
+        final double valeurajoutee = 151;
+        final float valeuraction = 50;
+        final Jour jour = new Jour(2025, 143);
+        final Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final ActionSimple action = new ActionSimple("Total");
+
+        action.enrgCours(jour, valeuraction);
+        portefeuille.provisionner(valeurajoutee);
+
+        // Action
         boolean success = portefeuille.acheterAction(action, 3, jour);
 
 
         //Assert
-        Assertions.assertFalse(success,"Achat refusée, solde insuffisant");
-
+        Assertions.assertTrue(success,"Achat réussi");
     }
 }
