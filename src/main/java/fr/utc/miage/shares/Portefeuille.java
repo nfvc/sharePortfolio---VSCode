@@ -51,4 +51,14 @@ public class Portefeuille {
         }
         return false;
     }
+
+    public final boolean acheterAction(final Action action, final int nombre, final Jour jour) {
+        float montant = nombre * action.valeur(jour);
+        if (this.solde >= montant && nombre > 0) {
+            this.solde -= montant;
+            this.actions.put(action, this.actions.getOrDefault(action, 0) + nombre);
+            return true;
+        }
+        return false;
+    }
 }

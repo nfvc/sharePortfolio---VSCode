@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 class PortefeuilleTest {
 
     /**
-     * client.
+     * Client.
     */
     private static final Client CLIENT = new Client("Aymane", "Akcha", "Toulouse", "0456377890", "akcha@outlook.fr", "akcha");
 
@@ -47,6 +47,9 @@ class PortefeuilleTest {
         );
     }
 
+    /**
+     * Test Accesseur
+    */
     @Test
     void testAccessorsShouldWork() {
 
@@ -67,6 +70,9 @@ class PortefeuilleTest {
         );
     }
 
+    /**
+     * Test d'approvisionnement du portefeuille avec une valeur positive
+    */
     @Test
     void testProvisionnerPositif() {
         //Arrange
@@ -84,18 +90,94 @@ class PortefeuilleTest {
         );
     }
 
+    /**
+     * Test d'approvisionnement du portefeuille avec une valeur négative
+    */
     @Test
     void testProvisionnerNegatif() {
+        //Arrange
         Portefeuille portefeuille = new Portefeuille(CLIENT);
         final double valeurAjoutee = -50;
 
-        boolean nosuccess = portefeuille.provisionner(valeurAjoutee);
+        //Action
+        boolean success = portefeuille.provisionner(valeurAjoutee);
 
+        //Assert
         Assertions.assertAll("Ajout d'une valeur négative",
-            () -> Assertions.assertFalse(nosuccess, "L'ajout échoue"),
+            () -> Assertions.assertFalse(success, "L'ajout échoue"),
             () -> Assertions.assertEquals(0.0, portefeuille.getSolde(), "Le solde n'a pas changée")
         );
     }
 
-    
+    /**
+     * Test d'achat d'actions avec un solde insuffisant
+    */
+    @Test
+    final void testAchatActionSoldeInsuffisant() {
+        //Arrange
+        final double solde = 149;
+        final float valeuraction = 50;
+        final Jour jour = new Jour(2025, 143);
+        final Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final ActionSimple action = new ActionSimple("Total");
+
+        action.enrgCours(jour, valeuraction);
+        portefeuille.provisionner(solde);
+
+        // Action
+        boolean success = portefeuille.acheterAction(action, 6, jour);
+
+
+        //Assert
+        Assertions.assertFalse(success,"Achat refusée, solde insuffisant");
+    }
+
+    /**
+     * Test d'achat réussi et solde débité
+    */
+    @Test
+    final void testAchatActionReussi() {
+        //Arrange
+        final double solde = 151;
+        final float valeuraction = 50;
+        final Jour jour = new Jour(2025, 143);
+        final Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final ActionSimple action = new ActionSimple("Total");
+
+        action.enrgCours(jour, valeuraction);
+        portefeuille.provisionner(solde);
+
+        // Action
+        boolean success = portefeuille.acheterAction(action, 3, jour);
+
+
+        //Assert
+        Assertions.assertAll("Achat réussi",
+            () -> Assertions.assertTrue(success,"Achat réussi"),
+            () -> Assertions.assertEquals(solde - (3 * valeuraction), portefeuille.getSolde(), "Le solde a été débité")
+        );
+    }
+
+    /**
+     * Test d'achat d'action avec un nombre négatif ou nul
+    */
+    @Test
+    final void testAchatActionNegatif() {
+        //Arrange
+        final double solde = 151;
+        final float valeuraction = 50;
+        final Jour jour = new Jour(2025, 143);
+        final Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final ActionSimple action = new ActionSimple("Total");
+
+        action.enrgCours(jour, valeuraction);
+        portefeuille.provisionner(solde);
+
+        // Action
+        boolean success = portefeuille.acheterAction(action, -4, jour);
+
+
+        //Assert
+        Assertions.assertFalse(success,"Achat refusée, le nombre d'action est négatif ou nul");
+    }
 }
