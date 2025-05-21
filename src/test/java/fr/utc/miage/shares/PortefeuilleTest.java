@@ -238,37 +238,6 @@ class PortefeuilleTest {
     }
 
 
-
-
-
-
-
-    @Test
-    public void testConsulterPortefeuille() {
-
-        Portefeuille portefeuille = new Portefeuille(CLIENT);
-
-        ActionSimple action = new ActionSimple("TotalEnergies");
-        Jour aujourdHui = new Jour(java.time.LocalDate.now().getYear(), java.time.LocalDate.now().getDayOfMonth());
-
-        action.enrgCours(aujourdHui, 52.2f);
-
-        portefeuille.provisionner(2004);
-
-        portefeuille.acheterAction(action, 35, aujourdHui);
-
-
-        double valeurTotale = portefeuille.consulterPortefeuille();
-
-        Assertions.assertEquals(1827, valeurTotale, 0.001, "La valeur totale du portefeuille devrait être 500.0");
-    }
-
-
-
-
-
-
-
     @Test
     public void testConsulterPortefeuille() {
 
