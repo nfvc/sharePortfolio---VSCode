@@ -24,32 +24,32 @@ class PortefeuilleTest {
 
     /**
      * Client.
-    */
-    private static final Client CLIENT = new Client("Aymane", "Akcha", "Toulouse", "0456377890", "akcha@outlook.fr", "akcha");
+     */
+    private static final Client CLIENT = new Client("Aymane", "Akcha", "Toulouse", "0456377890", "akcha@outlook.fr",
+            "akcha");
 
     /**
      * Test Constructeur
-    */
-     @Test
+     */
+    @Test
     final void testConstructorSuccess() {
-        //Arrange
+        // Arrange
         final Portefeuille portefeuille = new Portefeuille(CLIENT);
 
-        //Action
+        // Action
         final String expectedNomClient = "Aymane";
         final String expectedPrenomClient = "Akcha";
-        
-
 
         Assertions.assertAll("Vérification infos du constructeur",
-            () -> Assertions.assertEquals(expectedNomClient, portefeuille.getClient().getNom(), "Le nom correspond à celui du constructeur"),
-            () -> Assertions.assertEquals(expectedPrenomClient, portefeuille.getClient().getPrenom(), "Le prénom correspond à celui du constructeur")
-        );
+                () -> Assertions.assertEquals(expectedNomClient, portefeuille.getClient().getNom(),
+                        "Le nom correspond à celui du constructeur"),
+                () -> Assertions.assertEquals(expectedPrenomClient, portefeuille.getClient().getPrenom(),
+                        "Le prénom correspond à celui du constructeur"));
     }
 
     /**
      * Test Accesseur
-    */
+     */
     @Test
     void testAccessorsShouldWork() {
 
@@ -63,58 +63,56 @@ class PortefeuilleTest {
 
         // Assert
         Assertions.assertAll("Test des accesseurs de Portefeuille",
-            () -> Assertions.assertEquals(CLIENT, actualClient, "Le client doit correspondre à CLIENT"),
-            () -> Assertions.assertEquals(0.0, actualSolde, "Solde à 0.0"),
-            () -> Assertions.assertNotNull(actualActions, "La HashMap n'est pas null"),
-            () -> Assertions.assertTrue(actualActions.isEmpty(), "Aucune action présente")
-        );
+                () -> Assertions.assertEquals(CLIENT, actualClient, "Le client doit correspondre à CLIENT"),
+                () -> Assertions.assertEquals(0.0, actualSolde, "Solde à 0.0"),
+                () -> Assertions.assertNotNull(actualActions, "La HashMap n'est pas null"),
+                () -> Assertions.assertTrue(actualActions.isEmpty(), "Aucune action présente"));
     }
 
     /**
      * Test d'approvisionnement du portefeuille avec une valeur positive
-    */
+     */
     @Test
     void testProvisionnerPositif() {
-        //Arrange
+        // Arrange
         Portefeuille portefeuille = new Portefeuille(CLIENT);
         final double valeurattendue = 100;
         final double valeurajoutee = 100;
 
-        //Action
+        // Action
         boolean success = portefeuille.provisionner(valeurajoutee);
 
-        //Assert
+        // Assert
         Assertions.assertAll("Ajout d'une valeur négative",
-            () -> Assertions.assertTrue(success, "L'ajout à été réussi"),
-            () -> Assertions.assertEquals(valeurattendue, portefeuille.getSolde(), "Le solde à atteint la valeur attendu")
-        );
+                () -> Assertions.assertTrue(success, "L'ajout à été réussi"),
+                () -> Assertions.assertEquals(valeurattendue, portefeuille.getSolde(),
+                        "Le solde à atteint la valeur attendu"));
     }
 
     /**
      * Test d'approvisionnement du portefeuille avec une valeur négative
-    */
+     */
     @Test
     void testProvisionnerNegatif() {
-        //Arrange
+        // Arrange
         Portefeuille portefeuille = new Portefeuille(CLIENT);
         final double valeurAjoutee = -50;
 
-        //Action
+        // Action
         boolean success = portefeuille.provisionner(valeurAjoutee);
 
-        //Assert
+        // Assert
         Assertions.assertAll("Ajout d'une valeur négative",
-            () -> Assertions.assertFalse(success, "L'ajout échoue"),
-            () -> Assertions.assertEquals(0.0, portefeuille.getSolde(), "Le solde n'a pas changée")
-        );
+                () -> Assertions.assertFalse(success, "L'ajout échoue"),
+                () -> Assertions.assertEquals(0.0, portefeuille.getSolde(), "Le solde n'a pas changée"));
     }
 
     /**
      * Test d'achat d'actions avec un solde insuffisant
-    */
+     */
     @Test
     final void testAchatActionSoldeInsuffisant() {
-        //Arrange
+        // Arrange
         final double solde = 149;
         final float valeuraction = 50;
         final Jour jour = new Jour(2025, 143);
@@ -127,17 +125,16 @@ class PortefeuilleTest {
         // Action
         boolean success = portefeuille.acheterAction(action, 6, jour);
 
-
-        //Assert
-        Assertions.assertFalse(success,"Achat refusée, solde insuffisant");
+        // Assert
+        Assertions.assertFalse(success, "Achat refusée, solde insuffisant");
     }
 
     /**
      * Test d'achat réussi et solde débité
-    */
+     */
     @Test
     final void testAchatActionReussi() {
-        //Arrange
+        // Arrange
         final double solde = 151;
         final float valeuraction = 50;
         final Jour jour = new Jour(2025, 143);
@@ -150,20 +147,19 @@ class PortefeuilleTest {
         // Action
         boolean success = portefeuille.acheterAction(action, 3, jour);
 
-
-        //Assert
+        // Assert
         Assertions.assertAll("Achat réussi",
-            () -> Assertions.assertTrue(success,"Achat réussi"),
-            () -> Assertions.assertEquals(solde - (3 * valeuraction), portefeuille.getSolde(), "Le solde a été débité")
-        );
+                () -> Assertions.assertTrue(success, "Achat réussi"),
+                () -> Assertions.assertEquals(solde - (3 * valeuraction), portefeuille.getSolde(),
+                        "Le solde a été débité"));
     }
 
     /**
      * Test d'achat d'action avec un nombre négatif ou nul
-    */
+     */
     @Test
     final void testAchatActionNegatif() {
-        //Arrange
+        // Arrange
         final double solde = 151;
         final float valeuraction = 50;
         final Jour jour = new Jour(2025, 143);
@@ -176,9 +172,30 @@ class PortefeuilleTest {
         // Action
         boolean success = portefeuille.acheterAction(action, -4, jour);
 
+        // Assert
+        Assertions.assertFalse(success, "Achat refusée, le nombre d'action est négatif ou nul");
+    }
 
-        //Assert
-        Assertions.assertFalse(success,"Achat refusée, le nombre d'action est négatif ou nul");
+    @Test
+    final void testVenteReussie() {
+        // Arrange
+        final double solde = 1000;
+        final float valAction = 160;
+        final Jour jour = new Jour(2025, 130);
+        final Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final ActionSimple action = new ActionSimple("Airbus");
+        action.enrgCours(jour, valAction);
+        portefeuille.provisionner(solde);
+        portefeuille.acheterAction(action, 4, jour);
+
+        // Action
+        boolean success = portefeuille.vendreAction(action, 3, jour);
+
+        // Assert
+
+        Assertions.assertTrue(success, "Vente reussie");
+        Assertions.assertEquals(1, portefeuille.getActions().getOrDefault(action, 0));
+
     }
 
 }
