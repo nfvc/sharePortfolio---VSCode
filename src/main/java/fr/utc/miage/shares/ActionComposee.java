@@ -134,4 +134,28 @@ public class ActionComposee extends Action {
         }
         return sb.toString();
     }
+
+
+
+    public static void main(String[] args) {
+        ActionSimple france2 = new ActionSimple("France 2");
+        ActionSimple france3 = new ActionSimple("France 3");
+        ActionSimple france5 = new ActionSimple("France 5");
+
+        Jour j1 = new Jour(2024, 140);
+        france2.enrgCours(j1, 100f);
+        france3.enrgCours(j1, 200f);
+        france5.enrgCours(j1, 50f);
+
+        ActionComposee franceTV = new ActionComposee("France Télévision");
+
+        franceTV.ajouterActionSimple(france2, 35f);
+        franceTV.ajouterActionSimple(france3, 50f);
+        franceTV.ajouterActionSimple(france5, 15f);
+
+        System.out.println(franceTV);
+        System.out.println("Valeur au jour J : " + franceTV.valeur(j1) + "€");
+    }
+
+
 }
