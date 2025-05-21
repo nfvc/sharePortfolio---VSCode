@@ -214,4 +214,26 @@ class PortefeuilleTest {
         // Assert
         Assertions.assertFalse(success, "Vente echouée, pas assez d'action possédée");
     }
+
+    @Test
+    final void testVenteEchouePasAction() {
+        // Arrange
+        final double solde = 1000;
+        final float valAction = 160;
+        final float valActionDeux = 50;
+        final Jour jour = new Jour(2025, 130);
+        final Portefeuille portefeuille = new Portefeuille(CLIENT);
+        final ActionSimple action = new ActionSimple("Airbus");
+        final ActionSimple actionDeux = new ActionSimple("total");
+        action.enrgCours(jour, valAction);
+        action.enrgCours(jour, valActionDeux);
+        portefeuille.provisionner(solde);
+        portefeuille.acheterAction(actionDeux, 2, jour);
+
+        // Action
+        boolean success = portefeuille.vendreAction(action, 1, jour);
+
+        // Assert
+        Assertions.assertFalse(success, "Vente echouée, action non possédée");
+    }
 }
