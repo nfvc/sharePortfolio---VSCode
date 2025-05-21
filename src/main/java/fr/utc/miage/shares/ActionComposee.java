@@ -1,9 +1,8 @@
 package fr.utc.miage.shares;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -12,7 +11,7 @@ import java.util.Map.Entry;
  */
 public class ActionComposee extends Action {
 
-     // Map des actions simples et leurs pourcentages associés (entre 0 et 100)
+    // Map des actions simples et leurs pourcentages associés (entre 0 et 100)
     private final Map<ActionSimple, Float> composition;
 
     public ActionComposee(String libelle) {
@@ -27,8 +26,6 @@ public class ActionComposee extends Action {
      * @param action l'action simple à ajouter
      * @param pourcentage le pourcentage associé
      */
-
-
     public void ajouterActionSimple(ActionSimple action, float pourcentage) {
         if (!composition.containsKey(action)) {
             float total = getPourcentageTotal() + pourcentage;
@@ -39,14 +36,45 @@ public class ActionComposee extends Action {
     }
 
     /**
+     * Supprime une action simple de la composition.
+     *
+     * @param action l'action à supprimer
+     */
+    public void supprimerActionSimple(ActionSimple action) {
+        composition.remove(action);
+    }
+
+    /**
+     * Modifie le pourcentage d'une action existante, si le total reste <= 100 %.
+     *
+     * @param action l'action à modifier
+     * @param nouveauPourcentage le nouveau pourcentage à affecter
+     */
+    public void modifierPourcentage(ActionSimple action, float nouveauPourcentage) {
+        if (composition.containsKey(action)) {
+            float totalSansCetteAction = getPourcentageTotal() - composition.get(action);
+            if (totalSansCetteAction + nouveauPourcentage <= 100f) {
+                composition.put(action, nouveauPourcentage);
+            }
+        }
+    }
+
+    /**
+     * Vérifie si la composition atteint exactement 100 %.
+     *
+     * @return true si total == 100 %, false sinon
+     */
+    public boolean estComplete() {
+        return getPourcentageTotal() == 100f;
+    }
+
+    /**
      * Retourne la valeur de l'action composée pour un jour donné.
      * C'est la somme pondérée des valeurs des actions simples.
      *
      * @param j le jour à évaluer
      * @return la valeur calculée
      */
-
-    
     @Override
     public float valeur(Jour j) {
         float valeurTotale = 0f;
@@ -60,8 +88,9 @@ public class ActionComposee extends Action {
 
     /**
      * Calcule la somme des pourcentages actuellement enregistrés.
+     *
+     * @return le total des pourcentages
      */
-
     public float getPourcentageTotal() {
         float total = 0f;
         for (float p : composition.values()) {
@@ -71,15 +100,37 @@ public class ActionComposee extends Action {
     }
 
     /**
+     * Vérifie si une action simple est déjà présente dans la composition.
+     *
+     * @param action l'action à vérifier
+     * @return true si elle est présente, false sinon
+     */
+    public boolean contientAction(ActionSimple action) {
+        return composition.containsKey(action);
+    }
+
+    /**
+     * Récupère la liste des actions simples dans la composition.
+     *
+     * @return liste des actions simples
+     */
+    public List<ActionSimple> getActionsSimples() {
+        return new ArrayList<>(composition.keySet());
+    }
+
+    /**
      * Affiche le contenu de la composition.
      */
-    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(getLibelle()).append(" :\n");
         for (Entry<ActionSimple, Float> entry : composition.entrySet()) {
             sb.append(" - ").append(entry.getKey().getLibelle())
               .append(" : ").append(entry.getValue()).append("%\n");
+        }
+        sb.append("Total : ").append(getPourcentageTotal()).append("%");
+        if (!estComplete()) {
+            sb.append(" (incomplet)");
         }
         return sb.toString();
     }
