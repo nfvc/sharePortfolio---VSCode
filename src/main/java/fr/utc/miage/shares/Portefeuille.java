@@ -62,8 +62,22 @@ public class Portefeuille {
         return false;
     }
 
+    public final double consulterPortefeuille() {
+        Jour dateJour = new Jour(java.time.LocalDate.now().getYear(), java.time.LocalDate.now().getDayOfMonth());
+        ;
+        double res = 0;
+        for (Map.Entry<Action, Integer> entrer : this.actions.entrySet()) {
+            Action action = entrer.getKey();
+            int nombre = entrer.getValue();
+            res = res + (action.valeur(dateJour) * nombre);
+        }
+        return res;
+    }
+
+
+
     public final boolean vendreAction(final Action action, final int nombre, final Jour jour) {
-        if (nombre < 0) 
+        if (nombre < 0)
             return false;
 
         if (this.actions.getOrDefault(action, 0) >= nombre) {
