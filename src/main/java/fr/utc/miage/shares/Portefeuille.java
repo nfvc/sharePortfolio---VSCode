@@ -61,4 +61,17 @@ public class Portefeuille {
         }
         return false;
     }
+
+    public final double consulterPortefeuille() {
+        Jour dateJour = new Jour(java.time.LocalDate.now().getYear(), java.time.LocalDate.now().getDayOfMonth());
+        ;
+        double res = 0;
+        for (Map.Entry<Action, Integer> entrer : this.actions.entrySet()) {
+            Action action = entrer.getKey();
+            int nombre = entrer.getValue();
+            res = res + (action.valeur(dateJour) * nombre);
+        }
+        return res;
+    }
+
 }
