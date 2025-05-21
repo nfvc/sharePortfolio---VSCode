@@ -180,4 +180,5 @@ class PortefeuilleTest {
         //Assert
         Assertions.assertFalse(success,"Achat refusée, le nombre d'action est négatif ou nul");
     }
+
 }
