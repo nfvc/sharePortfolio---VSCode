@@ -1,3 +1,10 @@
+[//]: # 
+
+[//]: # (* Allows the creation of simple Action objects.)
+
+[//]: # 
+
+[//]: # (* @author David Navarre &lt;David.Navarre at irit.fr&gt;)
 # SharePortfolio - Porte Feuille d'Action
 
 ## Membres d'équipe :
