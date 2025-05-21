@@ -15,6 +15,7 @@
  */
 package fr.utc.miage.shares;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,8 +58,23 @@ public class Portefeuille {
         if (this.solde >= montant && nombre > 0) {
             this.solde -= montant;
             this.actions.put(action, this.actions.getOrDefault(action, 0) + nombre);
-            return true;
+                        return true;
         }
         return false;
     }
+
+
+    public final double consulterPortefeuille() {
+        Jour dateJour = new Jour(java.time.LocalDate.now().getYear(), java.time.LocalDate.now().getDayOfMonth());
+        ;
+        double res = 0;
+        for (Map.Entry<Action, Integer> entrer : this.actions.entrySet()) {
+            Action action = entrer.getKey();
+            int nombre = entrer.getValue();
+            res = res + (action.valeur(dateJour) * nombre);
+        }
+        return res;
+    }
+
+
 }
