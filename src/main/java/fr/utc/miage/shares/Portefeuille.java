@@ -21,10 +21,9 @@ import java.util.Map;
 public class Portefeuille {
     
     private final Client client;
-
     private final HashMap<Action, Integer> actions;
-
     private double solde;
+    private final Historique historique = new Historique();
 
     public Portefeuille(Client client) {
         this.client = client;
@@ -34,6 +33,10 @@ public class Portefeuille {
 
     public final Client getClient() {
         return client;
+    }
+
+    public Historique getHistorique() {
+        return historique;
     }
 
     public final double getSolde() {
@@ -57,6 +60,10 @@ public class Portefeuille {
         if (this.solde >= montant && nombre > 0) {
             this.solde -= montant;
             this.actions.put(action, this.actions.getOrDefault(action, 0) + nombre);
+
+            Transaction transaction = new Transaction(action, nombre, jour, montant, Transaction.Type.ACHAT);
+            this.historique.ajouterTransaction(transaction);
+
             return true;
         }
         return false;
@@ -64,7 +71,6 @@ public class Portefeuille {
 
     public final double consulterPortefeuille() {
         Jour dateJour = new Jour(java.time.LocalDate.now().getYear(), java.time.LocalDate.now().getDayOfMonth());
-        ;
         double res = 0;
         for (Map.Entry<Action, Integer> entrer : this.actions.entrySet()) {
             Action action = entrer.getKey();
@@ -73,8 +79,6 @@ public class Portefeuille {
         }
         return res;
     }
-
-
 
     public final boolean vendreAction(final Action action, final int nombre, final Jour jour) {
         if (nombre < 0)
