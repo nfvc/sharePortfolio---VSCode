@@ -17,6 +17,9 @@ package fr.utc.miage.shares;
 
 import java.util.ArrayList;
 
+/**
+ * Représente le marché financier qui gère l'ensemble des actions disponibles.
+ */
 public class MarcheFinancier {
 
     private final ArrayList<Action> actions;

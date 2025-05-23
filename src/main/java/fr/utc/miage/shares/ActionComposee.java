@@ -30,11 +30,22 @@ public class ActionComposee extends Action {
     // Map des actions simples et leurs pourcentages associés (entre 0 et 100)
     private final Map<ActionSimple, Float> composition;
 
+    /**
+     * Construit une nouvelle action composée avec un libellé donné.
+     * Initialise une composition vide.
+     *
+     * @param libelle le libellé de l'action composée
+     */
     public ActionComposee(String libelle) {
         super(libelle);
         this.composition = new HashMap<>();
     }
 
+    /**
+     * Récupère la composition de l'action composée.
+     *
+     * @return une Map associant chaque action simple à son pourcentage dans la composition
+     */
     public Map<ActionSimple,Float> getComposition() {
         return this.composition;
     }
@@ -66,7 +77,7 @@ public class ActionComposee extends Action {
     }
 
     /**
-     * Modifie le pourcentage d'une action existante, si le total reste <= 100 %.
+     * Modifie le pourcentage d'une action existante, si le total reste <= 100 &#37;.
      *
      * @param action l'action à modifier
      * @param nouveauPourcentage le nouveau pourcentage à affecter
@@ -81,7 +92,7 @@ public class ActionComposee extends Action {
     }
 
     /**
-     * Vérifie si la composition atteint exactement 100 %.
+     * Vérifie si la composition atteint exactement 100  &#37;.
      *
      * @return true si total == 100 %, false sinon
      */
