@@ -239,7 +239,7 @@ class PortefeuilleTest {
 
 
     @Test
-    public void testConsulterPortefeuille() {
+    final void testConsulterPortefeuille() {
 
         Portefeuille portefeuille = new Portefeuille(CLIENT);
 

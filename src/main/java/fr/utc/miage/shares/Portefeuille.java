@@ -26,6 +26,7 @@ public class Portefeuille {
     private final Client client;
     private final HashMap<Action, Integer> actions;
     private double solde;
+    private final Historique historique = new Historique();
 
     public Portefeuille(Client client) {
         this.client = client;
