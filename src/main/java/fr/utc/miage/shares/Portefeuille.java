@@ -30,10 +30,15 @@ public class Portefeuille {
      */
     private final HashMap<Action, Integer> actions;
 
-    /**
+     /**
      * Le solde disponible du portefeuille
      */
     private double solde;
+
+    /**
+     * L'historique du portefeuille
+     */
+    private final Historique historique = new Historique();
 
     /**
      * Constructeur de la classe Portefeuille.
@@ -54,6 +59,15 @@ public class Portefeuille {
      */
     public final Client getClient() {
         return client;
+    }
+
+    /**
+     * Récupère l'historique du portefeuille.
+     *
+     * @return L'historique du portefeuille
+     */
+    public Historique getHistorique() {
+        return historique;
     }
 
     /**
@@ -101,6 +115,10 @@ public class Portefeuille {
         if (this.solde >= montant && nombre > 0) {
             this.solde -= montant;
             this.actions.put(action, this.actions.getOrDefault(action, 0) + nombre);
+
+            Transaction transaction = new Transaction(action, nombre, jour, montant, Transaction.Type.ACHAT);
+            this.historique.ajouterTransaction(transaction);
+
             return true;
         }
         return false;
@@ -140,6 +158,8 @@ public class Portefeuille {
             float montant = nombre * action.valeur(jour);
             this.solde += montant;
             this.actions.put(action, this.actions.getOrDefault(action, 0) - nombre);
+            Transaction transaction = new Transaction(action, nombre, jour, montant, Transaction.Type.VENTE);
+            this.historique.ajouterTransaction(transaction);
             return true;
         }
 
