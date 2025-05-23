@@ -25,7 +25,17 @@ public class Client {
     private String password;
 
 
-    /// Constructeur
+    /**
+     * Constructeur de la classe Client.
+     * Initialise un nouveau client avec ses informations personnelles.
+     *
+     * @param nom Le nom du client
+     * @param prenom Le prénom du client
+     * @param adresse L'adresse postale du client
+     * @param mail L'adresse e-mail du client
+     * @param telephone Le numéro de téléphone du client
+     * @param password Le mot de passe du client
+     */
     public Client(String nom, String prenom, String adresse, String mail, String telephone, String password) {
         this.nom = nom;
         this.prenom = prenom;
@@ -35,52 +45,119 @@ public class Client {
         this.password = password;
     }
 
+    /**
+     * GETTER
+     *
+     */
 
-    /// Méthodes
+    /**
+     * Récupère le nom du client.
+     *
+     * @return Le nom du client
+     */
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
+    /**
+     * Récupère le prénom du client.
+     *
+     * @return Le prénom du client
+     */
     public String getPrenom() {
         return prenom;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
+    /**
+     * Récupère l'adresse du client.
+     *
+     * @return L'adresse postale du client
+     */
     public String getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    /**
+     * Modifie le nom du client.
+     *
+     * @param nom Le nouveau nom à attribuer au client
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
+    /**
+     * Récupère le numéro de téléphone du client.
+     *
+     * @return Le numéro de téléphone du client
+     */
     public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
+    /**
+     * Récupère l'adresse e-mail du client.
+     *
+     * @return L'adresse e-mail du client
+     */
     public String getMail() {
         return mail;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
+    /**
+     * Récupère le mot de passe du client.
+     *
+     * @return Le mot de passe du client
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * SETTER
+     */
+
+    /**
+     * Modifie le prénom du client.
+     *
+     * @param prenom Le nouveau prénom à attribuer au client
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    /**
+     * Modifie l'adresse du client.
+     *
+     * @param adresse La nouvelle adresse à attribuer au client
+     */
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    /**
+     * Modifie le numéro de téléphone du client.
+     *
+     * @param telephone Le nouveau numéro de téléphone à attribuer au client
+     */
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    /**
+     * Modifie l'adresse e-mail du client.
+     *
+     * @param mail La nouvelle adresse e-mail à attribuer au client
+     */
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    /**
+     * Modifie le mot de passe du client.
+     *
+     * @param password Le nouveau mot de passe à attribuer au client
+     */
     public void setPassword(String password) {
         this.password = password;
     }

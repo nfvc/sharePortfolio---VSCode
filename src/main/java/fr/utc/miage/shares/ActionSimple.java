@@ -27,24 +27,41 @@ public class ActionSimple extends Action {
 
     private static final int DEFAULT_ACTION_VALUE = 0;
 
-    // attribut lien
+    /**
+     * Attribut de lien, pour le cours de l'action
+     */
     private final Map<Jour, Float> mapCours;
 
-    // constructeur
+    /**
+     * Constructeur d'une action simple.
+     * Initialise une nouvelle action avec un libellé donné et une map vide pour stocker les cours.
+     *
+     * @param libelle Le nom/libellé de l'action à créer
+     */
     public ActionSimple(final String libelle) {
-        // Action simple initialisée comme 1 action
         super(libelle);
-        // init spécifique
         this.mapCours = new HashMap<>();
     }
 
-    // enrg possible si pas de cours pour ce jour
+    /**
+     * Enregistre le cours d'une action pour un jour donné.
+     * L'enregistrement n'est possible que si aucun cours n'existe déjà pour ce jour.
+     *
+     * @param j Le jour pour lequel on souhaite enregistrer le cours
+     * @param v La valeur du cours de l'action à enregistrer
+     */
     public void enrgCours(final Jour j, final float v) {
         if (!this.mapCours.containsKey(j)) {
             this.mapCours.put(j, v);
         }
     }
 
+    /**
+     * Retourne la valeur de l'action pour un jour donné.
+     *
+     * @param j Le jour pour lequel on souhaite connaître la valeur de l'action
+     * @return La valeur de l'action au jour j si elle existe, sinon retourne la valeur par défaut (0)
+     */
     @Override
     public float valeur(final Jour j) {
         if (this.mapCours.containsKey(j)) {

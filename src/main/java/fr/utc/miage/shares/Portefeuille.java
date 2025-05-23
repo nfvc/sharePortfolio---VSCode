@@ -19,31 +19,67 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Portefeuille {
-    
+
+    /**
+     * Le client propriétaire du portefeuille
+     */
     private final Client client;
 
+    /**
+     * La liste des actions détenues avec leurs quantités
+     */
     private final HashMap<Action, Integer> actions;
 
+    /**
+     * Le solde disponible du portefeuille
+     */
     private double solde;
 
+    /**
+     * Constructeur de la classe Portefeuille.
+     * Initialise un nouveau portefeuille pour un client donné.
+     *
+     * @param client Le client propriétaire du portefeuille
+     */
     public Portefeuille(Client client) {
         this.client = client;
         this.actions = new HashMap<>();
         this.solde = 0;
     }
 
+    /**
+     * Récupère le client propriétaire du portefeuille.
+     *
+     * @return Le client propriétaire
+     */
     public final Client getClient() {
         return client;
     }
 
+    /**
+     * Récupère le solde disponible du portefeuille.
+     *
+     * @return Le solde du portefeuille
+     */
     public final double getSolde() {
         return solde;
     }
 
+    /**
+     * Récupère la liste des actions détenues.
+     *
+     * @return La map des actions avec leurs quantités
+     */
     public final Map<Action, Integer> getActions() {
         return actions;
     }
 
+    /**
+     * Ajoute de l'argent au solde du portefeuille.
+     *
+     * @param argent Le montant à ajouter au solde (doit être positif)
+     * @return true si le provisionnement a réussi, false sinon
+     */
     public final boolean provisionner(final double argent) {
         if (argent > 0) {
             this.solde += argent;
@@ -52,6 +88,14 @@ public class Portefeuille {
         return false;
     }
 
+    /**
+     * Achète des actions pour le portefeuille.
+     *
+     * @param action L'action à acheter
+     * @param nombre Le nombre d'actions à acheter
+     * @param jour Le jour de l'achat
+     * @return true si l'achat a réussi, false sinon
+     */
     public final boolean acheterAction(final Action action, final int nombre, final Jour jour) {
         float montant = nombre * action.valeur(jour);
         if (this.solde >= montant && nombre > 0) {
@@ -62,9 +106,14 @@ public class Portefeuille {
         return false;
     }
 
+    /**
+     * Calcule la valeur totale du portefeuille au jour actuel.
+     * Additionne la valeur de toutes les actions détenues en fonction de leur cours du jour.
+     *
+     * @return La valeur totale du portefeuille
+     */
     public final double consulterPortefeuille() {
         Jour dateJour = new Jour(java.time.LocalDate.now().getYear(), java.time.LocalDate.now().getDayOfMonth());
-        ;
         double res = 0;
         for (Map.Entry<Action, Integer> entrer : this.actions.entrySet()) {
             Action action = entrer.getKey();
@@ -74,8 +123,15 @@ public class Portefeuille {
         return res;
     }
 
-
-
+    /**
+     * Vend des actions du portefeuille.
+     * La vente est possible uniquement si le client possède suffisamment d'actions.
+     *
+     * @param action L'action à vendre
+     * @param nombre Le nombre d'actions à vendre
+     * @param jour Le jour de la vente
+     * @return true si la vente a réussi, false si le nombre est négatif ou si le client ne possède pas assez d'actions
+     */
     public final boolean vendreAction(final Action action, final int nombre, final Jour jour) {
         if (nombre < 0)
             return false;
