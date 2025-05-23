@@ -53,7 +53,7 @@ public class ActionComposee extends Action {
 
     /**
      * Ajoute une action simple avec un pourcentage donné.
-     * Si l'action est déjà présente ou si le total dépasse 100 %, elle n'est pas ajoutée.
+     * Si l'action est déjà présente ou si le total dépasse 100, elle n'est pas ajoutée.
      *
      * @param action l'action simple à ajouter
      * @param pourcentage le pourcentage associé
@@ -77,7 +77,7 @@ public class ActionComposee extends Action {
     }
 
     /**
-     * Modifie le pourcentage d'une action existante, si le total reste <= 100 &#37;.
+     * Modifie le pourcentage d'une action, si le total reste inferieur ou egal 100.
      *
      * @param action l'action à modifier
      * @param nouveauPourcentage le nouveau pourcentage à affecter
@@ -92,11 +92,10 @@ public class ActionComposee extends Action {
     }
 
     /**
-     * Vérifie si la composition atteint exactement 100  &#37;.
+     * Vérifie si la composition atteint exactement 100.
      *
-     * @return true si total == 100 %, false sinon
+     * @return true si total == 100 , false sinon
      */
-    
     public boolean estComplete() {
         return getPourcentageTotal() == 100f;
     }
