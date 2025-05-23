@@ -88,6 +88,8 @@ public class Portefeuille {
             float montant = nombre * action.valeur(jour);
             this.solde += montant;
             this.actions.put(action, this.actions.getOrDefault(action, 0) - nombre);
+            Transaction transaction = new Transaction(action, nombre, jour, montant, Transaction.Type.VENTE);
+            this.historique.ajouterTransaction(transaction);
             return true;
         }
 
