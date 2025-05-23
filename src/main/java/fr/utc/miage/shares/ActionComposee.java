@@ -1,3 +1,19 @@
+/*
+ * Copyright 2025 David Navarre &lt;David.Navarre at irit.fr&gt;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package fr.utc.miage.shares;
 
 import java.util.ArrayList;
@@ -18,6 +34,11 @@ public class ActionComposee extends Action {
         super(libelle);
         this.composition = new HashMap<>();
     }
+
+    public Map<ActionSimple,Float> getComposition() {
+        return this.composition;
+    }
+
 
     /**
      * Ajoute une action simple avec un pourcentage donné.
@@ -64,6 +85,7 @@ public class ActionComposee extends Action {
      *
      * @return true si total == 100 %, false sinon
      */
+    
     public boolean estComplete() {
         return getPourcentageTotal() == 100f;
     }
@@ -134,31 +156,5 @@ public class ActionComposee extends Action {
         }
         return sb.toString();
     }
-<<<<<<< HEAD
 
-
-
-    public static void main(String[] args) {
-        ActionSimple france2 = new ActionSimple("France 2");
-        ActionSimple france3 = new ActionSimple("France 3");
-        ActionSimple france5 = new ActionSimple("France 5");
-
-        Jour j1 = new Jour(2024, 140);
-        france2.enrgCours(j1, 100f);
-        france3.enrgCours(j1, 200f);
-        france5.enrgCours(j1, 50f);
-
-        ActionComposee franceTV = new ActionComposee("France Télévision");
-
-        franceTV.ajouterActionSimple(france2, 35f);
-        franceTV.ajouterActionSimple(france3, 50f);
-        franceTV.ajouterActionSimple(france5, 15f);
-
-        System.out.println(franceTV);
-        System.out.println("Valeur au jour J : " + franceTV.valeur(j1) + "€");
-    }
-
-
-=======
->>>>>>> cfc36cef29a5fa092a25ba78fede6def4912cf34
 }

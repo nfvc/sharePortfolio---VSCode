@@ -58,7 +58,7 @@ class PortefeuilleTest {
 
         // Action
         final Client actualClient = portefeuille.getClient();
-        final double actualSolde = portefeuille.getSolde();
+        final double actualSolde  = portefeuille.getSolde();
         final Map<Action, Integer> actualActions = portefeuille.getActions();
 
         // Assert
@@ -75,6 +75,7 @@ class PortefeuilleTest {
     */
     @Test
     void testProvisionnerPositif() {
+
         //Arrange
         Portefeuille portefeuille = new Portefeuille(CLIENT);
         final double valeurattendue = 100;
@@ -112,6 +113,7 @@ class PortefeuilleTest {
     /**
      * Test d'achat d'actions avec un solde insuffisant
     */
+
     @Test
     final void testAchatActionSoldeInsuffisant() {
         //Arrange
@@ -135,6 +137,7 @@ class PortefeuilleTest {
     /**
      * Test d'achat réussi et solde débité
     */
+
     @Test
     final void testAchatActionReussi() {
         //Arrange
@@ -164,6 +167,8 @@ class PortefeuilleTest {
     @Test
     final void testAchatActionNegatif() {
         //Arrange
+
+        
         final double solde = 151;
         final float valeuraction = 50;
         final Jour jour = new Jour(2025, 143);
