@@ -62,10 +62,28 @@ class HistoriqueTest {
     }
     
     /**
-     * Test Ajouter une transaction à l'historique
+     * Test Ajouter une transaction d'achat à l'historique
      */
     @Test
-    void testAjouterTransactionReussie() {
+    void testAjouterTransactionAchatReussie() {
+        // Arrange
+        Historique historique = new Historique();
+
+        // Act
+        historique.ajouterTransaction(TRANSACTION);
+
+        // Assert
+        Assertions.assertAll("La transaction à été ajoutée dans l'historique",
+            () -> Assertions.assertEquals(1, historique.getTransactions().size(), "Une transaction doit être ajoutée"),
+            () -> Assertions.assertTrue(historique.getTransactions().contains(TRANSACTION), "L'historique doit contenir la transaction ajoutée")
+        );
+    }
+
+    /**
+     * Test Ajouter une transaction de vente à l'historique
+     */
+    @Test
+    void testAjouterTransactionVenteReussie() {
         // Arrange
         Historique historique = new Historique();
 
