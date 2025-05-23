@@ -417,4 +417,51 @@ void testValeurAbsente() {
 }
 
 
+/* Action complète */
+
+@Test
+void testToStringSucess() {
+    // Arrange
+    ActionComposee actionComposee = new ActionComposee("TV Publique");
+    ActionSimple france2 = new ActionSimple("France 2");
+    ActionSimple france3 = new ActionSimple("France 3");
+    ActionSimple france5 = new ActionSimple("France 5");
+
+    actionComposee.ajouterActionSimple(france2, 35f);
+    actionComposee.ajouterActionSimple(france3, 50f);
+    actionComposee.ajouterActionSimple(france5, 15f);
+
+    // Act
+    String result = actionComposee.toString();
+
+    // Assert
+    String expected = """
+        TV Publique :
+         - France 5 : 15.0%
+         - France 3 : 50.0%         
+         - France 2 : 35.0%
+        Total : 100.0%""";
+    Assertions.assertEquals(expected, result.trim());
+}
+
+/*Action incomplète */
+
+@Test
+void testToStringFail() {
+    // Arrange
+    ActionComposee actionComposee = new ActionComposee("TV Partielle");
+    ActionSimple france2 = new ActionSimple("France 2");
+    ActionSimple france3 = new ActionSimple("France 3");
+
+    actionComposee.ajouterActionSimple(france2, 40f);
+    actionComposee.ajouterActionSimple(france3, 30f); // total = 70
+
+    // Act
+    String result = actionComposee.toString();
+
+    // Assert
+    String expectedSuffix = "Total : 70.0% (incomplet)";
+    Assertions.assertTrue(result.endsWith(expectedSuffix), "La fin du toString doit indiquer que la composition est incomplète");
+}
+
 }
