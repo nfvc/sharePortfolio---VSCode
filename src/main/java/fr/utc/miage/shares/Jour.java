@@ -92,7 +92,7 @@ public class Jour {
 
     @Override
     public String toString() {
-        return "Jour [année=" + year + ", jour=" + day + "]";
+        return "Jour [year=" + year + ", day=" + day + "]";
     }
 
 }
