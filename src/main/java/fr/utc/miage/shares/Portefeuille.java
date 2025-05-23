@@ -24,23 +24,9 @@ public class Portefeuille {
      * Le client propriétaire du portefeuille
      */
     private final Client client;
-
-    /**
-     * La liste des actions détenues avec leurs quantités
-     */
     private final HashMap<Action, Integer> actions;
-
-    /**
-     * Le solde disponible du portefeuille
-     */
     private double solde;
 
-    /**
-     * Constructeur de la classe Portefeuille.
-     * Initialise un nouveau portefeuille pour un client donné.
-     *
-     * @param client Le client propriétaire du portefeuille
-     */
     public Portefeuille(Client client) {
         this.client = client;
         this.actions = new HashMap<>();
@@ -56,11 +42,10 @@ public class Portefeuille {
         return client;
     }
 
-    /**
-     * Récupère le solde disponible du portefeuille.
-     *
-     * @return Le solde du portefeuille
-     */
+    public Historique getHistorique() {
+        return historique;
+    }
+
     public final double getSolde() {
         return solde;
     }
@@ -101,6 +86,10 @@ public class Portefeuille {
         if (this.solde >= montant && nombre > 0) {
             this.solde -= montant;
             this.actions.put(action, this.actions.getOrDefault(action, 0) + nombre);
+
+            Transaction transaction = new Transaction(action, nombre, jour, montant, Transaction.Type.ACHAT);
+            this.historique.ajouterTransaction(transaction);
+
             return true;
         }
         return false;
@@ -123,15 +112,6 @@ public class Portefeuille {
         return res;
     }
 
-    /**
-     * Vend des actions du portefeuille.
-     * La vente est possible uniquement si le client possède suffisamment d'actions.
-     *
-     * @param action L'action à vendre
-     * @param nombre Le nombre d'actions à vendre
-     * @param jour Le jour de la vente
-     * @return true si la vente a réussi, false si le nombre est négatif ou si le client ne possède pas assez d'actions
-     */
     public final boolean vendreAction(final Action action, final int nombre, final Jour jour) {
         if (nombre < 0)
             return false;

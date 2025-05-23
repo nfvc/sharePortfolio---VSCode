@@ -24,7 +24,7 @@ class Historique {
 
     public Historique() {
         this.transactions = new ArrayList<>();
-    };
+    }
 
     public void ajouterTransaction(Transaction transaction) {
         transactions.add(transaction);
