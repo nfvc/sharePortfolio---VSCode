@@ -31,16 +31,34 @@ class HistoriqueTest {
      */
     @Test
     void testGetTransactions() {
+        // Arrange
         Historique historique = new Historique();
 
+        // Act
         historique.ajouterTransaction(TRANSACTION);
         List<Transaction> transactions = historique.getTransactions();
 
+        // Assert
         Assertions.assertAll("La transaction est affichée dans l'historique",
             () -> Assertions.assertFalse(transactions.isEmpty(), "L'historique ne doit pas être vide"),
             () -> Assertions.assertEquals(1, transactions.size(), "L'historique doit contenir une transaction"),
             () -> Assertions.assertEquals(TRANSACTION, transactions.get(0), "La transaction dans l'historique est la même que celle que je viens d'ajouter")
         );
+    }
+
+    /**
+     * Test afficher historique vide
+     */
+    @Test
+    void testHistoriqueVide() {
+        // Arrange
+        Historique historique = new Historique();
+
+        // Act
+        List<Transaction> transactions = historique.getTransactions();
+
+        // Assert
+        Assertions.assertTrue(transactions.isEmpty(), "L'historique est vide");
     }
     
     /**
