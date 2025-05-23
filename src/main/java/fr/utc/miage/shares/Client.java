@@ -15,6 +15,9 @@
  */
 package fr.utc.miage.shares;
 
+/**
+ * Représente un client du système boursier.
+ */
 public class Client {
 
     private String nom;

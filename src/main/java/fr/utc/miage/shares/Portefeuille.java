@@ -18,6 +18,10 @@ package fr.utc.miage.shares;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Représente un portefeuille d'actions détenues par un client.
+ * Permet de gérer les transactions d'achat et de vente d'actions.
+ */
 public class Portefeuille {
 
     /**

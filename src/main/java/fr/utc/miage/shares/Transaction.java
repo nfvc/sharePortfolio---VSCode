@@ -15,14 +15,45 @@
  */
 package fr.utc.miage.shares;
 
+/**
+ * Représente une transaction d'achat ou de vente d'actions.
+ */
 public class Transaction {
-    public enum Type {ACHAT, VENTE}
+
+    /**
+     * Types de transactions possibles : achat ou vente.
+     */
+    public enum Type {
+        /**
+         * Transaction d'achat d'actions.
+         */
+        ACHAT,
+        /**
+         * Transaction de vente d'actions.
+         */
+        VENTE
+    }
+
     private Action action;
+
     private int quantite;
+
     private Jour jour;
+
     private float montant;
+
     private Type type;
 
+
+    /**
+     * Crée une nouvelle transaction.
+     *
+     * @param action l'action concernée par la transaction
+     * @param quantite le nombre d'actions
+     * @param jour le jour de la transaction
+     * @param montant le montant total de la transaction
+     * @param type le type de transaction (achat ou vente)
+     */
     public Transaction(Action action, int quantite, Jour jour, float montant, Type type) {
         this.action = action;
         this.quantite = quantite;
@@ -31,22 +62,47 @@ public class Transaction {
         this.type = type;
     }
 
+    /**
+     * Récupère l'action concernée par la transaction.
+     *
+     * @return l'action concernée
+     */
     public Action getAction() {
         return action;
     }
 
+    /**
+     * Récupère la quantité d'actions de la transaction.
+     *
+     * @return la quantité d'actions
+     */
     public int getQuantite() {
         return quantite;
     }
 
+    /**
+     * Récupère le jour de la transaction.
+     *
+     * @return le jour de la transaction
+     */
     public Jour getJour() {
         return jour;
     }
 
+    /**
+     * Récupère le montant total de la transaction.
+     *
+     * @return le montant de la transaction
+     */
     public float getMontant() {
         return montant;
     }
 
+    /**
+     * Récupère le type de la transaction.
+     *
+     * @return le type (achat ou vente)
+     */
     public Type getType() {
         return type;
     }

@@ -17,18 +17,35 @@ package fr.utc.miage.shares;
 
 import java.util.ArrayList;
 
+/**
+ * Représente le marché financier qui gère l'ensemble des actions disponibles.
+ */
 public class MarcheFinancier {
 
     private final ArrayList<Action> actions;
 
+    /**
+     * Constructeur du marché financier.
+     * Initialise la liste des actions disponibles.
+     */
     public MarcheFinancier() {
         this.actions = new ArrayList<>();
     }
 
+    /**
+     * Récupère la liste des actions disponibles sur le marché.
+     *
+     * @return la liste des actions
+     */
     public final ArrayList<Action> getActions() {
         return actions;
     }
 
+    /**
+     * Ajoute une action au marché financier.
+     *
+     * @param action l'action à ajouter
+     */
     public final void setAction(final Action action) {
         this.actions.add(action);
     }
