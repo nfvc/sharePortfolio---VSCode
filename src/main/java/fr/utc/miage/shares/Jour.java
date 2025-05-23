@@ -23,44 +23,44 @@ package fr.utc.miage.shares;
 public class Jour {
 
     /**
-     * Year attribute.
+     * Attribut Année.
      */
     private final int year;
     /**
-     * Day attribute.
+     * Attribut Jour.
      */
     private final int day;
 
     /**
-     * Builds a Jour object from one year and one day.
+     * Construit un objet Jour à partir d'une année et d'un jour.
      *
-     * @param aYear the year of the jour &gt; 0
-     * @param aDay  theday of the jour &gt; 0
+     * @param aYear l'année du jour &gt; 0
+     * @param aDay le jour &gt; 0
      */
     public Jour(final int aYear, final int aDay) {
         if (0 >= aDay) {
-            throw new IllegalArgumentException("Day must be strictly more than 0");
+            throw new IllegalArgumentException("Le jour doit être strictement supérieur à 0");
         }
         if (0 >= aYear) {
-            throw new IllegalArgumentException("Year must be strictly more than 0");
+            throw new IllegalArgumentException("L'année doit être strictement supérieure à 0");
         }
         this.year = aYear;
         this.day = aDay;
     }
 
     /**
-     * Returns the year of the jour.
+     * Retourne l'année du jour.
      *
-     * @return the year property
+     * @return la valeur de l'année
      */
     public int getYear() {
         return year;
     }
 
     /**
-     * Returns the day of the jour.
+     * Retourne le jour.
      *
-     * @return the day property
+     * @return la valeur du jour
      */
     public int getDay() {
         return day;

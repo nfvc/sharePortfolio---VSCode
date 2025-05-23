@@ -27,28 +27,28 @@ public abstract class Action {
     private final String libelle;
 
     /**
-     * Get the value of libelle
+     * Récupère le libellé de l'action.
      *
-     * @return the value of libelle
+     * @return le libellé de l'action
      */
     public String getLibelle() {
         return libelle;
     }
 
     /**
-     * Builds an Action object from a string parameter.
+     * Construit un objet Action à partir d'un libellé.
      *
-     * @param libelle the name of the action object
+     * @param libelle le libellé de l'action
      */
     protected Action(final String libelle) {
         this.libelle = libelle;
     }
 
     /**
-     * Provides the value of the action object for a given day.
+     * Calcule la valeur de l'action pour un jour donné.
      *
-     * @param j
-     * @return
+     * @param j le jour pour lequel calculer la valeur
+     * @return la valeur de l'action au jour donné
      */
     public abstract float valeur(Jour j);
 
