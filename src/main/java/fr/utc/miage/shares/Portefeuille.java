@@ -24,10 +24,28 @@ public class Portefeuille {
      * Le client propriétaire du portefeuille
      */
     private final Client client;
+
+    /**
+     * La liste des actions détenues avec leurs quantités
+     */
     private final HashMap<Action, Integer> actions;
+
+     /**
+     * Le solde disponible du portefeuille
+     */
     private double solde;
+
+    /**
+     * L'historique du portefeuille
+     */
     private final Historique historique = new Historique();
 
+    /**
+     * Constructeur de la classe Portefeuille.
+     * Initialise un nouveau portefeuille pour un client donné.
+     *
+     * @param client Le client propriétaire du portefeuille
+     */
     public Portefeuille(Client client) {
         this.client = client;
         this.actions = new HashMap<>();
@@ -43,10 +61,20 @@ public class Portefeuille {
         return client;
     }
 
+    /**
+     * Récupère l'historique du portefeuille.
+     *
+     * @return L'historique du portefeuille
+     */
     public Historique getHistorique() {
         return historique;
     }
 
+    /**
+     * Récupère le solde disponible du portefeuille.
+     *
+     * @return Le solde du portefeuille
+     */
     public final double getSolde() {
         return solde;
     }
@@ -113,6 +141,15 @@ public class Portefeuille {
         return res;
     }
 
+    /**
+     * Vend des actions du portefeuille.
+     * La vente est possible uniquement si le client possède suffisamment d'actions.
+     *
+     * @param action L'action à vendre
+     * @param nombre Le nombre d'actions à vendre
+     * @param jour Le jour de la vente
+     * @return true si la vente a réussi, false si le nombre est négatif ou si le client ne possède pas assez d'actions
+     */
     public final boolean vendreAction(final Action action, final int nombre, final Jour jour) {
         if (nombre < 0)
             return false;
