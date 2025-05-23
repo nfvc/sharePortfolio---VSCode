@@ -16,7 +16,7 @@
 package fr.utc.miage.shares;
 
 public class Transaction {
-    enum Type {ACHAT, VENTE};
+    public enum Type {ACHAT, VENTE}
     private Action action;
     private int quantite;
     private Jour jour;
